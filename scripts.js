@@ -4,65 +4,8 @@ let swiper; // Global swiper variable
 let uniqueDates; // Array to store unique dates
 
 
-var photoData = [
-    {
-        id: 1,
-        lat: 38.76165133333333,
-        lng: -77.30790544444444,
-        month: 'June',
-        year: 2024,
-        photos: [
-            '/photos/1_1.JPG',
-            '/photos/1_2.JPG',
-            '/photos/1_3.JPG'
-        ],
-        description: 'Burke Lake Park, 9:06 PM'
-    },
-    {
-        id: 2,
-        lat: 38.72045927777778,
-        lng: -77.33891588888888,
-        month: 'August',
-        year: 2024,
-        photos: [
-            '/photos/2_1.JPG',
-            '/photos/2_2.JPG',
-            '/photos/2_3.JPG'
-        ],
-        description: 'Fountainhead Regional Park, 6:06 PM'
-    },
-    {
-        id: 3,
-        lat: 38.60755788888889,
-        lng: -77.26645125,
-        month: 'August',
-        year: 2024,
-        photos: [
-            '/photos/3_1.JPG',
-            '/photos/3_2.JPG',
-        ],
-        description: 'Burke Lake Park, 9:06 PM'
-    },
-    {
-        id: 4,
-        lat: 38.60755788888889,
-        lng: -77.26645125,
-        month: 'September',
-        year: 2024,
-        photos: [
-            '/photos/3_1.JPG',
-            '/photos/3_2.JPG',
-        ],
-        description: 'Burke Lake Park, 9:06 PM'
-    },
-
-    // Add more photo objects as needed
-];
-
-
 // Function to create uniqueDates array
 function createUniqueDates() {
-    // Assuming photoData is your array of photo objects
     uniqueDates = Array.from(new Set(photoData.map(photo => `${photo.month} ${photo.year}`)))
         .sort((a, b) => {
             const [monthA, yearA] = a.split(' ');
@@ -96,10 +39,9 @@ function updateMapbox(selectedDate) {
     markers.forEach(marker => marker.remove());
     markers = [];
 
-    // Add new markers with link to separate gallery page
+    // Add new markers with a link to the gallery page
     filteredData.forEach(photo => {
-        const photoUrls = photo.photos.map(url => encodeURIComponent(url)).join('&photos[]=');
-        const galleryUrl = `gallery.html?photos[]=${photoUrls}&description=${encodeURIComponent(photo.description)}`;
+        const galleryUrl = `gallery.html?id=${photo.id}`; // Pass only the gallery ID
 
         const marker = new mapboxgl.Marker()
             .setLngLat([photo.lng, photo.lat])
@@ -118,7 +60,6 @@ function updateMapbox(selectedDate) {
         map.fitBounds(bounds, { padding: 50, maxZoom: 15 });
     }
 }
-
 
 // Debounce function
 function debounce(func, wait) {
@@ -233,42 +174,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeArrow = header.querySelector('.close-arrow');
   
     header.addEventListener('click', function(e) {
-      if (e.target === closeArrow && header.classList.contains('expanded')) {
-        header.classList.remove('expanded');
-        document.body.classList.remove('header-expanded');
-      } else if (e.target !== closeArrow) {
-        header.classList.toggle('expanded');
-        document.body.classList.toggle('header-expanded');
-      }
+        if (e.target === closeArrow && header.classList.contains('expanded')) {
+            header.classList.remove('expanded');
+            document.body.classList.remove('header-expanded');
+        } else if (e.target !== closeArrow) {
+            header.classList.toggle('expanded');
+            document.body.classList.toggle('header-expanded');
+        }
     });
   
     // Close header when clicking on a nav link
     const navLinks = header.querySelectorAll('.header-nav a');
     navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent the header click event
-        header.classList.remove('expanded');
-        document.body.classList.remove('header-expanded');
-      });
+        link.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent the header click event
+            header.classList.remove('expanded');
+            document.body.classList.remove('header-expanded');
+        });
     });
   
     // Prevent map interaction when header is expanded
     if (mapContainer && typeof map !== 'undefined') {
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-            if (header.classList.contains('expanded')) {
-              map.scrollZoom.disable();
-              map.dragPan.disable();
-            } else {
-              map.scrollZoom.enable();
-              map.dragPan.enable();
-            }
-          }
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    if (header.classList.contains('expanded')) {
+                        map.scrollZoom.disable();
+                        map.dragPan.disable();
+                    } else {
+                        map.scrollZoom.enable();
+                        map.dragPan.enable();
+                    }
+                }
+            });
         });
-      });
   
-      observer.observe(header, { attributes: true });
+        observer.observe(header, { attributes: true });
     }
-  });
-  
+});

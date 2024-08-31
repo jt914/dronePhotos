@@ -13,6 +13,25 @@
 </head>
 <body>
 
+    <!-- Reusing Header from Map Page -->
+    <header id="immersive-header" class="immersive-header">
+        <div class="header-content">
+            <h1 class="header-title">Photo Journey</h1>
+            <div class="close-arrow">▼</div>
+        </div>
+        <nav class="header-nav">
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Go Back Button -->
+    <div class="go-back-container">
+        <button onclick="window.location.href='index.html';">Go Back to Map</button>
+    </div>
+
     <div class="gallery-container" id="gallery">
         <!-- Images will be injected here -->
     </div>
@@ -20,5 +39,7 @@
     <!-- Lightbox2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="gallery.js"></script>
+    <script src="photoData.js"></script>
+
 </body>
 </html>
