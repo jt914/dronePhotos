@@ -23,7 +23,6 @@ var photoData = [
             '/photos/1/15.JPG',
             '/photos/1/16.JPG',
             '/photos/1/17.JPG',
-            '/photos/1/18.JPG'
             ],
         description: 'Burke Lake Park, 9:06 PM'
     },
@@ -50,7 +49,13 @@ var photoData = [
             '/photos/2/14.JPG',
             '/photos/2/15.JPG',
             '/photos/2/16.JPG',
-            '/photos/2/17.JPG'
+            '/photos/2/17.JPG',
+            '/photos/2/18.JPG',
+            '/photos/2/19.JPG',
+            '/photos/2/20.JPG',
+            '/photos/2/21.JPG',
+            '/photos/2/22.JPG'
+
         ],
         description: 'Fountainhead Regional Park, 6:06 PM'
     },
@@ -77,10 +82,7 @@ var photoData = [
             '/photos/3/14.JPG',
             '/photos/3/15.JPG',
             '/photos/3/16.JPG',
-            '/photos/3/17.JPG',
-            '/photos/3/18.JPG',
-            '/photos/3/19.JPG',
-            '/photos/3/20.JPG'
+            '/photos/3/17.JPG'
         ],
         description: 'Burke Lake Park, 9:06 PM'
     },

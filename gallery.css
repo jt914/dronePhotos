@@ -121,13 +121,12 @@ body, html {
     transform: translateY(-2px);
 }
 
-/* Gallery styles */
 .gallery-container {
     width: 90%;
     max-width: 1400px;
     margin: 40px auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 20px;
 }
 
@@ -195,4 +194,77 @@ body, html {
 .lightbox .lb-prev:hover, 
 .lightbox .lb-next:hover {
     opacity: 1;
+}
+/* Overlay for full resolution image and side pane */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 0 10vw; /* Ensure equal padding of 10vw on both sides */
+    box-sizing: border-box;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%; /* Use the full width available after padding */
+    max-width: 80vw; /* Keep content within 80vw to match the padding */
+    background: #222;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.overlay-img {
+    flex: 1 1 60%; /* Allow the image to take up 60% of the remaining space */
+    max-height: 80vh;
+    object-fit: cover;
+}
+
+.side-pane {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20vw; /* Side pane should strictly take up 20vw */
+    height: auto; /* Ensure it matches the image height */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.pane-info {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.pane-button {
+    background-color: #007aff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end;
+}
+
+.pane-button:hover {
+    background-color: #005bb5;
+}
+
+/* Prevent background scrolling when overlay is open */
+.no-scroll {
+    overflow: hidden;
 }
