@@ -168,6 +168,10 @@ body.header-expanded #map {
     position: relative;
     cursor: pointer;
 }
+.custom-marker {
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
 
 .swiper-slide .month {
     font-weight: 500;
