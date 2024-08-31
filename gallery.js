@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gallery.photos.forEach(photo => {
         const link = document.createElement('a');
         link.href = photo;
+        link.target = '_blank';  // This makes the link open in a new tab
         link.dataset.lightbox = 'gallery';
         link.dataset.title = gallery.description;
 

@@ -47,7 +47,7 @@ function updateMapbox(selectedDate) {
             .setLngLat([photo.lng, photo.lat])
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <p>${photo.description}</p>
-                <a href="${galleryUrl}" target="_blank">View Photos</a>
+                <a href="${galleryUrl}">View Photos</a>
             `))
             .addTo(map);
         markers.push(marker);
