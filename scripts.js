@@ -12,9 +12,9 @@ var photoData = [
         month: 'June',
         year: 2024,
         photos: [
-            '../photos/1_1.JPG',
-            '../photos/1_2.JPG',
-            '../photos/1_3.JPG'
+            '/photos/1_1.JPG',
+            '/photos/1_2.JPG',
+            '/photos/1_3.JPG'
         ],
         description: 'Burke Lake Park, 9:06 PM'
     },
@@ -25,9 +25,9 @@ var photoData = [
         month: 'August',
         year: 2024,
         photos: [
-            '../photos/2_1.JPG',
-            '../photos/2_2.JPG',
-            '../photos/2_3.JPG'
+            '/photos/2_1.JPG',
+            '/photos/2_2.JPG',
+            '/photos/2_3.JPG'
         ],
         description: 'Fountainhead Regional Park, 6:06 PM'
     },
@@ -38,20 +38,20 @@ var photoData = [
         month: 'August',
         year: 2024,
         photos: [
-            '../photos/3_1.JPG',
-            '../photos/3_2.JPG',
+            '/photos/3_1.JPG',
+            '/photos/3_2.JPG',
         ],
         description: 'Burke Lake Park, 9:06 PM'
     },
     {
-        id: 3,
+        id: 4,
         lat: 38.60755788888889,
         lng: -77.26645125,
         month: 'September',
         year: 2024,
         photos: [
-            '../photos/3_1.JPG',
-            '../photos/3_2.JPG',
+            '/photos/3_1.JPG',
+            '/photos/3_2.JPG',
         ],
         description: 'Burke Lake Park, 9:06 PM'
     },
@@ -99,7 +99,7 @@ function updateMapbox(selectedDate) {
     // Add new markers with link to separate gallery page
     filteredData.forEach(photo => {
         const photoUrls = photo.photos.map(url => encodeURIComponent(url)).join('&photos[]=');
-        const galleryUrl = `photo-gallery.html?photos[]=${photoUrls}&description=${encodeURIComponent(photo.description)}`;
+        const galleryUrl = `gallery.html?photos[]=${photoUrls}&description=${encodeURIComponent(photo.description)}`;
 
         const marker = new mapboxgl.Marker()
             .setLngLat([photo.lng, photo.lat])
