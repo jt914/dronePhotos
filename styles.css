@@ -1,0 +1,166 @@
+/* Import a nice Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Map styles */
+#map {
+    height: calc(100vh - 40px);
+    width: calc(100% - 120px); /* Slightly increased to give more space to the slider */
+    margin-right: 120px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+    
+}
+
+.swiper-container-gallery {
+    width: 90%;
+    max-width: 1000px; /* Adjust width for larger screens */
+    height: 600px; /* Adjust height as needed */
+    margin: 0 auto; /* Center the Swiper */
+}
+
+.swiper-slide-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000000; /* Black color for navigation buttons */
+}
+
+.swiper-pagination-bullet {
+    background: #000000; /* Black color for pagination dots */
+}
+
+
+/* Slider container styles */
+#slider-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px; /* Increased width for better visibility */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(44, 44, 44, 0.9); /* Slightly more opaque */
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    z-index: 1000;
+    overflow: visible;
+    padding: 20px 0;
+}
+
+.swiper-container {
+    width: 100px;
+    height: 90%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.swiper-slide {
+    width: 100%;
+    height: auto;
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.swiper-slide .month {
+    font-weight: 500;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.swiper-slide .year {
+    font-size: 12px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.swiper-slide-active {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.swiper-slide-active .month {
+    font-weight: 600;
+}
+
+.swiper-slide-active .year {
+    font-size: 14px;
+    opacity: 1;
+}
+
+/* Styles for slides adjacent to the active slide */
+.swiper-slide-prev, .swiper-slide-next {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+/* Subtle scrollbar styles */
+.swiper-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.swiper-container::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}
+
+.swiper-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+/* Remove default focus outline and add custom one */
+.swiper-slide:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+}
+
+/* Fading edges to indicate more content */
+.swiper-container::before,
+.swiper-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.swiper-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(44,44,44,0.9), transparent);
+}
+
+.swiper-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(44,44,44,0.9), transparent);
+}
