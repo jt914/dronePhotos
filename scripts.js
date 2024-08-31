@@ -43,7 +43,15 @@ function updateMapbox(selectedDate) {
     filteredData.forEach(photo => {
         const galleryUrl = `gallery.html?id=${photo.id}`; // Pass only the gallery ID
 
-        const marker = new mapboxgl.Marker()
+        // Create a custom marker element
+        const markerElement = document.createElement('div');
+        markerElement.className = 'custom-marker';
+        markerElement.style.backgroundColor = 'red';  // Set the background color to red
+        markerElement.style.width = '30px';
+        markerElement.style.height = '30px';
+        markerElement.style.borderRadius = '50%';
+
+        const marker = new mapboxgl.Marker(markerElement)
             .setLngLat([photo.lng, photo.lat])
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <p>${photo.description}</p>
