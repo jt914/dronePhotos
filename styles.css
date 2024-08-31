@@ -1,67 +1,150 @@
-/* Import a nice Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* General body and html styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #1c1c1e; /* Dark background to match the theme */
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Header styles */
+.immersive-header {
+    position: fixed;
+    top: 0;
+    left: 1vw; /* Adjust for map margin */
+    right: 1vw; /* Adjust for date timeline */
+    background-color: rgba(44, 44, 44, 0.7);
+    backdrop-filter: blur(1.5vh);
+    color: #fff;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 1vh;
+
+}
+
+.immersive-header:hover {
+    height: 8vh;
+}
+
+.immersive-header.expanded {
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgba(22, 22, 22, 0.95);
+    backdrop-filter: blur(2vh);
+}
+
+.header-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.header-title {
+    font-size: 2vh;
+    font-weight: 500;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.immersive-header.expanded .header-title {
+    font-size: 5vh;
+    margin-bottom: 10vh; /* Increased space between title and nav links */
+}
+
+.close-arrow {
+    display: none;
+    font-size: 4vh;
+    margin-top: 4vh;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.immersive-header.expanded .close-arrow {
+    display: block;
+}
+
+.close-arrow:hover {
+    transform: scale(1.2);
+}
+
+.header-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.immersive-header.expanded .header-nav {
+    display: flex;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 3vh;
+    margin: 3vh 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #a0a0a0;
+    transform: scale(1.1);
+}
 
 /* Map styles */
 #map {
-    height: calc(100vh - 40px);
-    width: calc(100% - 120px); /* Slightly increased to give more space to the slider */
-    margin-right: 120px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    max-width: 100%;
+    height: calc(100vh - 8vh); /* Reduced height to give space for header */
+    width: calc(100% - 18vw); /* Adjust for right timeline */
+    margin: 8vh 12vw 2vh 2vw; /* Top, Right, Bottom, Left */
+    transition: filter 0.3s ease;
     box-sizing: border-box;
-    
+    border-radius: 1.5vh;
+    box-shadow: 0 1.5vh 3vh rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
-.swiper-container-gallery {
-    width: 90%;
-    max-width: 1000px; /* Adjust width for larger screens */
-    height: 600px; /* Adjust height as needed */
-    margin: 0 auto; /* Center the Swiper */
+body.header-expanded #map {
+    filter: blur(1vh);
 }
 
-.swiper-slide-gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: #000000; /* Black color for navigation buttons */
-}
-
-.swiper-pagination-bullet {
-    background: #000000; /* Black color for pagination dots */
-}
-
-
-/* Slider container styles */
 #slider-container {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 120px; /* Increased width for better visibility */
-    height: 100%;
+    border-radius: 1vh;
+    top: 8vh; /* Adjusted to match header height */
+    right: 2vw; /* Match the right margin of the map */
+    width: 12vw;
+    height: calc(100% - 7vh); /* Adjusted to account for header height */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(44, 44, 44, 0.9); /* Slightly more opaque */
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(1.5vh);
     box-sizing: border-box;
-    z-index: 1000;
+    z-index: 999; /* Lowered z-index to be below the header */
     overflow: visible;
-    padding: 20px 0;
+    padding: 3vh 0;
+
 }
 
 .swiper-container {
-    width: 100px;
-    height: 90%;
+    width: 10vw;
+    height: 100%; /* Changed to 100% to fill the container */
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 1vh;
+    box-shadow: inset 0 0 1vh rgba(0, 0, 0, 0.2);
 }
 
 .swiper-wrapper {
@@ -73,15 +156,14 @@
     width: 100%;
     height: auto;
     color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 1.5vh;
     font-weight: 400;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px 0;
+    padding: 1.5vh 0;
     transition: all 0.3s ease;
     position: relative;
     cursor: pointer;
@@ -89,21 +171,21 @@
 
 .swiper-slide .month {
     font-weight: 500;
-    margin-bottom: 4px;
+    margin-bottom: 0.5vh;
     transition: all 0.3s ease;
 }
 
 .swiper-slide .year {
-    font-size: 12px;
+    font-size: 1.2vh;
     opacity: 0.8;
     transition: all 0.3s ease;
 }
 
 .swiper-slide-active {
-    font-size: 16px;
+    font-size: 2vh;
     font-weight: 600;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    text-shadow: 0 0 1vh rgba(255,255,255,0.3);
 }
 
 .swiper-slide-active .month {
@@ -111,36 +193,36 @@
 }
 
 .swiper-slide-active .year {
-    font-size: 14px;
+    font-size: 1.4vh;
     opacity: 1;
 }
 
 /* Styles for slides adjacent to the active slide */
 .swiper-slide-prev, .swiper-slide-next {
-    font-size: 15px;
+    font-size: 1.7vh;
     font-weight: 500;
     opacity: 0.7;
 }
 
 /* Subtle scrollbar styles */
 .swiper-container::-webkit-scrollbar {
-    width: 4px;
+    width: 0.4vw;
 }
 
 .swiper-container::-webkit-scrollbar-track {
     background: rgba(255,255,255,0.1);
-    border-radius: 2px;
+    border-radius: 0.2vw;
 }
 
 .swiper-container::-webkit-scrollbar-thumb {
     background: rgba(255,255,255,0.3);
-    border-radius: 2px;
+    border-radius: 0.2vw;
 }
 
 /* Remove default focus outline and add custom one */
 .swiper-slide:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+    box-shadow: 0 0 0 0.2vh rgba(255,255,255,0.3);
 }
 
 /* Fading edges to indicate more content */
@@ -150,7 +232,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    height: 40px;
+    height: 4vh;
     z-index: 1;
     pointer-events: none;
 }
@@ -163,4 +245,28 @@
 .swiper-container::after {
     bottom: 0;
     background: linear-gradient(to top, rgba(44,44,44,0.9), transparent);
+}
+
+/* Gallery Swiper styles */
+.swiper-container-gallery {
+    width: 90%;
+    max-width: 70vw; /* Adjust width for larger screens */
+    height: 60vh; /* Adjust height as needed */
+    margin: 0 auto; /* Center the Swiper */
+}
+
+.swiper-slide-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1vh;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000000; /* Black color for navigation buttons */
+}
+
+.swiper-pagination-bullet {
+    background: #000000; /* Black color for pagination dots */
 }

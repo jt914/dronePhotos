@@ -35,6 +35,18 @@ var photoData = [
         id: 3,
         lat: 38.60755788888889,
         lng: -77.26645125,
+        month: 'August',
+        year: 2024,
+        photos: [
+            '../photos/3_1.JPG',
+            '../photos/3_2.JPG',
+        ],
+        description: 'Burke Lake Park, 9:06 PM'
+    },
+    {
+        id: 3,
+        lat: 38.60755788888889,
+        lng: -77.26645125,
         month: 'September',
         year: 2024,
         photos: [
@@ -214,3 +226,49 @@ document.addEventListener('DOMContentLoaded', function() {
     createSlides();
     initializeSwiper();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('immersive-header');
+    const mapContainer = document.getElementById('map');
+    const closeArrow = header.querySelector('.close-arrow');
+  
+    header.addEventListener('click', function(e) {
+      if (e.target === closeArrow && header.classList.contains('expanded')) {
+        header.classList.remove('expanded');
+        document.body.classList.remove('header-expanded');
+      } else if (e.target !== closeArrow) {
+        header.classList.toggle('expanded');
+        document.body.classList.toggle('header-expanded');
+      }
+    });
+  
+    // Close header when clicking on a nav link
+    const navLinks = header.querySelectorAll('.header-nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent the header click event
+        header.classList.remove('expanded');
+        document.body.classList.remove('header-expanded');
+      });
+    });
+  
+    // Prevent map interaction when header is expanded
+    if (mapContainer && typeof map !== 'undefined') {
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (header.classList.contains('expanded')) {
+              map.scrollZoom.disable();
+              map.dragPan.disable();
+            } else {
+              map.scrollZoom.enable();
+              map.dragPan.enable();
+            }
+          }
+        });
+      });
+  
+      observer.observe(header, { attributes: true });
+    }
+  });
+  
