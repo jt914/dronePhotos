@@ -21,7 +21,7 @@ function initializeMap() {
     mapboxgl.accessToken = 'pk.eyJ1IjoianQ5MTQiLCJhIjoiY20waGhmZTlrMGJkNDJsb21peGl3NjFtbiJ9.KU2qkLy2rhOgSiFLn6fMbA';
     map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/dark-v10',
+        style: 'mapbox://styles/mapbox/outdoors-v12',
         center: [-77.3064, 38.8462], // Fairfax, VA coordinates
         zoom: 12
     });
