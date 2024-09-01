@@ -5,6 +5,7 @@ body, html {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #1c1c1e;
     color: #f5f5f7;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Header styles (same as in the map page) */
@@ -121,6 +122,7 @@ body, html {
     transform: translateY(-2px);
 }
 
+/* Gallery styles */
 .gallery-container {
     width: 90%;
     max-width: 1400px;
@@ -185,7 +187,7 @@ body, html {
 
 .lightbox .lb-close, 
 .lightbox .lb-prev, 
-.lightbox .lb-next {
+lightbox .lb-next {
     opacity: 0.7;
     transition: opacity 0.3s ease;
 }
@@ -195,7 +197,8 @@ body, html {
 .lightbox .lb-next:hover {
     opacity: 1;
 }
-/* Overlay for full resolution image and side pane */
+
+/* Overlay styles */
 .overlay {
     position: fixed;
     top: 0;
@@ -203,30 +206,32 @@ body, html {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    padding: 0 10vw; /* Ensure equal padding of 10vw on both sides */
+    padding: 5vw;
     box-sizing: border-box;
+    overflow: auto; /* Ensure that content can scroll if too large for viewport */
 }
 
 .overlay-content {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    width: 100%; /* Use the full width available after padding */
-    max-width: 80vw; /* Keep content within 80vw to match the padding */
-    background: #222;
+    width: 100%;
+    max-width: 90vw; /* Maximize the width slightly to give more space to the content */
+    background: #333;
     border-radius: 12px;
     overflow: hidden;
 }
 
 .overlay-img {
-    flex: 1 1 60%; /* Allow the image to take up 60% of the remaining space */
-    max-height: 80vh;
-    object-fit: cover;
+    flex: 1 1 65%; /* Adjust the image to take slightly more space */
+    max-height: 70vh;
+    max-width: 100%;
+    object-fit: contain;
+    margin-right: 20px; /* Add margin to separate the image from the side pane */
 }
 
 .side-pane {
@@ -236,8 +241,8 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 20vw; /* Side pane should strictly take up 20vw */
-    height: auto; /* Ensure it matches the image height */
+    width: 25vw; /* Side pane takes up 25vw for a more balanced layout */
+    max-height: 80vh; /* Ensure side pane does not exceed image height */
     overflow-y: auto;
     box-sizing: border-box;
 }
@@ -267,4 +272,25 @@ body, html {
 /* Prevent background scrolling when overlay is open */
 .no-scroll {
     overflow: hidden;
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 900px) {
+    .overlay-content {
+        flex-direction: column;
+        max-width: 95vw; /* Allow more space on smaller screens */
+    }
+
+    .overlay-img {
+        flex: none; /* Override flex behavior on small screens */
+        max-height: 40vh; /* Reduce the height of the image */
+        width: 100%; /* Ensure the image takes up full width */
+        margin-right: 0; /* Remove margin on smaller screens */
+        margin-bottom: 20px; /* Add margin below the image */
+    }
+
+    .side-pane {
+        width: 100%; /* Make the side pane take full width */
+        max-height: 40vh; /* Adjust the height to match the smaller image */
+    }
 }
